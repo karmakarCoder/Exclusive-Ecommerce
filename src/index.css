@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+  * {
+    @apply m-0 p-0 outline-none box-border;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  img,
+  div,
+  li,
+  ul,
+  ol {
+    @apply m-0 p-0 leading-none;
+  }
+
+  a {
+    @apply no-underline inline-block;
+  }
+
+  img {
+    @apply align-middle;
+  }
+}
+
+:root {
+  --primary_white: #ffffff;
+  --primary_black: #000000;
+  --primary1: #363738;
+  --secondary: #f5f5f5;
+  --secondary1: #fefaf1;
+  --secondary2: #db4444;
+  --text: #fafafa;
+  --text1: #7d8184;
+  --button1: #00ff66;
+  --button2: #db4444;
+  --hoverButton: #e07575;
+  --hoverButton1: #a0bce0;
+  --borderColor: #0000004b;
+  --poppins: "Poppins", serif;
+  --inter: "Inter", serif;
+}

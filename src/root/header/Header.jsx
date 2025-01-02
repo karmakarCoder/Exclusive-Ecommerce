@@ -12,11 +12,18 @@ import { TfiTwitter } from "react-icons/tfi";
 import { FaInstagram } from "react-icons/fa6";
 import { RiLinkedinLine } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
-import { useEffect, useState } from "react";
+import { FiUser } from "react-icons/fi";
+import { LuShoppingBag } from "react-icons/lu";
+import { MdOutlineCancel } from "react-icons/md";
+import { TiStarOutline } from "react-icons/ti";
+import { HiOutlineLogin } from "react-icons/hi";
+import { useEffect, useRef, useState } from "react";
 
 const Header = () => {
   const [open, setopen] = useState(false);
+  const [userDropDown, setuserDropDown] = useState(false);
   const [searchInput, setSearchInput] = useState(false);
+  const dropdownRef = useRef(null);
   const list = ["Home", "Contact", "About", "Sign Up"];
 
   const HandleMobileSearchInput = () => {
@@ -39,6 +46,18 @@ const Header = () => {
       document.body.style.overflow = "auto";
     };
   }, [open]);
+
+  const HandleUser = () => {};
+
+  useEffect(() => {
+    window.addEventListener("click", (event) => {
+      if (dropdownRef.current.contains(event.target)) {
+        setuserDropDown(!userDropDown);
+      } else {
+        setuserDropDown(false);
+      }
+    });
+  }, [userDropDown]);
 
   return (
     <>
@@ -106,13 +125,13 @@ const Header = () => {
               {searchInput && (
                 <div
                   onClick={() => setSearchInput(false)}
-                  className="w-full h-full z-40 bg-[#00000088] fixed top-0 left-0"
+                  className="w-full h-full z-40 sm:hidden md:block bg-[#00000088] lg:hidden fixed top-0 left-0"
                 ></div>
               )}
 
               {/* search bar for mobile */}
               {searchInput && (
-                <div className="fixed z-50 md:top-[102px] top-[115px] left-0 w-full">
+                <div className="fixed sm:hidden md:block lg:hidden z-50 top-0 left-0 w-full">
                   <div className="w-full relative">
                     <input
                       type="text"
@@ -132,9 +151,54 @@ const Header = () => {
                 <IoMdHeartEmpty />
               </div>
               {/* cart */}
-              <div className="text-2xl cursor-pointer">
-                <IoCartOutline />
+              <div className="relative">
+                <div className="text-2xl cursor-pointer">
+                  <IoCartOutline />
+                </div>
+                <div className="size-4 absolute top-[-5px] right-[-5px] bg-secondary2 rounded-full flex items-center justify-center font-poppins font-normal text-xs text-primary_white">
+                  <p>2</p>
+                </div>
               </div>
+
+              {/* user */}
+              <div className="relative">
+                <div className="bg-secondary2 size-6 sm:size-8 rounded-full flex items-center justify-center text-primary_white">
+                  <div
+                    ref={dropdownRef}
+                    onClick={HandleUser}
+                    className="sm:text-[22px] text-base cursor-pointer"
+                  >
+                    <FiUser />
+                  </div>
+                </div>
+
+                {/* user dropdown */}
+                {userDropDown && (
+                  <div className="bg-[#0000003d] w-[225px] absolute top-[30px] sm:right-0 right-[-52px] z-40 font-poppins text-sm font-normal text-text rounded backdrop-blur-md">
+                    <div className="flex px-3 capitalize items-center gap-2 cursor-pointer py-3 hover:bg-[#ffffff10]">
+                      <FiUser className="text-xl" />
+                      <p>Manage My Account</p>
+                    </div>
+                    <div className="flex px-3 capitalize items-center gap-2 cursor-pointer py-3 hover:bg-[#ffffff10]">
+                      <LuShoppingBag className="text-xl" />
+                      <p>My Order</p>
+                    </div>
+                    <div className="flex px-3 capitalize items-center gap-2 cursor-pointer py-3 hover:bg-[#ffffff10]">
+                      <MdOutlineCancel className="text-xl" />
+                      <p>My Cancellations</p>
+                    </div>
+                    <div className="flex px-3 capitalize items-center gap-2 cursor-pointer py-3 hover:bg-[#ffffff10]">
+                      <TiStarOutline className="text-xl" />
+                      <p>My Reviews</p>
+                    </div>
+                    <div className="flex px-3 capitalize items-center gap-2 cursor-pointer py-3 hover:bg-[#ffffff10]">
+                      <HiOutlineLogin className="text-xl" />
+                      <p>Logout</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
               {/* menu bar */}
               <div
                 onClick={HandleMenuOpen}

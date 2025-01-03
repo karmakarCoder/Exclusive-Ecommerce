@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Img } from "react-image";
+import { Link, NavLink } from "react-router-dom";
 import { FiSearch } from "react-icons/fi";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
@@ -6,7 +7,6 @@ import { HiOutlineBars3CenterLeft } from "react-icons/hi2";
 import qrcode from "../../assets/Qrcode.png";
 import playstore from "../../assets/play-app-store.png";
 import appstore from "../../assets/appstore.png";
-import { Img } from "react-image";
 import { RiFacebookLine } from "react-icons/ri";
 import { TfiTwitter } from "react-icons/tfi";
 import { FaInstagram } from "react-icons/fa6";
@@ -134,12 +134,17 @@ const Header = () => {
             {/* navlist */}
             <ul className="md:flex hidden capitalize font-poppins font-normal lg:text-base text-sm items-center gap-10">
               {list?.map((item, index) => (
-                <li
+                <NavLink
                   key={index}
-                  className="relative after:absolute after:w-full after:h-[2px] after:bg-[#00000065] after:left-0 after:-bottom-1"
+                  to={item?.toLocaleLowerCase()}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "relative after:absolute font-semibold after:w-full after:h-[2px] after:bg-[#00000065] after:left-0 after:-bottom-1"
+                      : ""
+                  }
                 >
-                  <a href="#">{item}</a>
-                </li>
+                  {item}
+                </NavLink>
               ))}
             </ul>
             {/* search & wishlist & cart */}

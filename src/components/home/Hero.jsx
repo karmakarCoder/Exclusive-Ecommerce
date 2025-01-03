@@ -1,4 +1,12 @@
 import { MdKeyboardArrowRight } from "react-icons/md";
+import banner1 from "../../assets/banner.jpg";
+import { Swiper, SwiperSlide } from "swiper/react";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/pagination";
+
+// import required modules
+import { Pagination, Autoplay } from "swiper/modules";
 
 const Hero = () => {
   const category = [
@@ -43,11 +51,34 @@ const Hero = () => {
       subcategory: false,
     },
   ];
+
+  const slider = [
+    {
+      img: banner1,
+      link: "",
+    },
+    {
+      img: "https://img.pikbest.com/origin/10/01/82/867pIkbEsTAIq.png!w700wp",
+      link: "",
+    },
+    {
+      img: banner1,
+      link: "",
+    },
+    {
+      img: banner1,
+      link: "",
+    },
+    {
+      img: banner1,
+      link: "",
+    },
+  ];
   return (
-    <div>
+    <div className="pb-10">
       <div className="container flex">
         {/* left */}
-        <div className="w-[20%] pr-4 pt-10 border-r-[1px] border-borderColor">
+        <div className="hidden lg:block w-[20%] pr-4 pt-10 border-r-[1px] border-borderColor">
           <ul className="flex flex-col font-poppins font-normal text-base text-primary_black">
             {category.map((item, index) => (
               <div
@@ -65,7 +96,28 @@ const Hero = () => {
           </ul>
         </div>
         {/* right */}
-        <div className="w-[80%]">d</div>
+        <div className="lg:w-[80%] w-full lg:pl-10 pt-7 lg:pt-[52px]">
+          <div>
+            <Swiper
+              autoplay={{
+                delay: 2500,
+              }}
+              pagination={true}
+              modules={[Pagination, Autoplay]}
+              className="bannerSwiper"
+            >
+              {slider?.map((item, index) => (
+                <SwiperSlide key={index} className="w-full h-full">
+                  <img
+                    src={item.img}
+                    alt={item.img}
+                    className="w-full h-[170px]  sm:h-[250px] lg:h-[300px] xl:h-[400px] object-fill"
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+        </div>
       </div>
     </div>
   );

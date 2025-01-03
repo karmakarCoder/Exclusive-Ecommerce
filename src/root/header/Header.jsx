@@ -14,7 +14,7 @@ import { RiLinkedinLine } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
 import { FiUser } from "react-icons/fi";
 import { LuShoppingBag } from "react-icons/lu";
-import { MdOutlineCancel } from "react-icons/md";
+import { MdKeyboardArrowRight, MdOutlineCancel } from "react-icons/md";
 import { TiStarOutline } from "react-icons/ti";
 import { HiOutlineLogin } from "react-icons/hi";
 import { useEffect, useRef, useState } from "react";
@@ -25,6 +25,48 @@ const Header = () => {
   const [searchInput, setSearchInput] = useState(false);
   const dropdownRef = useRef(null);
   const list = ["Home", "Contact", "About", "Sign Up"];
+  const category = [
+    {
+      category: "Woman’s Fashion",
+      subcategory: false,
+    },
+    {
+      category: "Men’s Fashion",
+      subcategory: true,
+    },
+    {
+      category: "Electronics",
+      subcategory: false,
+    },
+    {
+      category: "Home & Lifestyle",
+      subcategory: false,
+    },
+    {
+      category: "Medicine",
+      subcategory: false,
+    },
+    {
+      category: "Sports & Outdoor",
+      subcategory: true,
+    },
+    {
+      category: "Baby’s & Toys",
+      subcategory: false,
+    },
+    {
+      category: "Baby’s & Toys",
+      subcategory: true,
+    },
+    {
+      category: "Groceries & Pets",
+      subcategory: true,
+    },
+    {
+      category: "Health & Beauty",
+      subcategory: false,
+    },
+  ];
 
   const HandleMobileSearchInput = () => {
     setopen(false);
@@ -174,7 +216,7 @@ const Header = () => {
 
                 {/* user dropdown */}
                 {userDropDown && (
-                  <div className="bg-[#0000003d] w-[225px] absolute top-[30px] sm:right-0 right-[-52px] z-40 font-poppins text-sm font-normal text-text rounded backdrop-blur-md">
+                  <div className="bg-[#00000063] w-[225px] absolute top-[37px] sm:right-0 right-[-52px] z-40 font-poppins text-sm font-normal text-text rounded backdrop-blur-md">
                     <div className="flex px-3 capitalize items-center gap-2 cursor-pointer py-3 hover:bg-[#ffffff10]">
                       <FiUser className="text-xl" />
                       <p>Manage My Account</p>
@@ -202,7 +244,7 @@ const Header = () => {
               {/* menu bar */}
               <div
                 onClick={HandleMenuOpen}
-                className="text-2xl cursor-pointer md:hidden"
+                className="text-2xl cursor-pointer lg:hidden"
               >
                 {open ? <RxCross2 /> : <HiOutlineBars3CenterLeft />}
               </div>
@@ -211,54 +253,82 @@ const Header = () => {
 
           {/* navlist for mobile */}
           {open && (
-            <div className="fixed z-[999] sm:flex-row sm:justify-center sm:gap-8 sm:flex md:block sm:top-[108px] top-[115px] pt-6 left-0 w-full h-full bg-primary_white">
-              <ul className="flex flex-col capitalize font-poppins font-normal lg:text-base text-sm items-center gap-5">
-                {list?.map((item, index) => (
-                  <li
-                    key={index}
-                    className="relative after:absolute after:w-full after:h-[2px] after:bg-[#00000065] after:left-0 after:-bottom-1"
-                  >
-                    <a href="#">{item}</a>
-                  </li>
-                ))}
-              </ul>
-              <div className="flex items-center sm:items-start sm:justify-start sm:mt-0 mt-10 justify-center text-2xl gap-4">
-                <a href="#">
-                  <RiFacebookLine />
-                </a>
-                <a href="#">
-                  <TfiTwitter />
-                </a>
-                <a href="#">
-                  <FaInstagram />
-                </a>
-                <a href="#">
-                  <RiLinkedinLine />
-                </a>
-              </div>
-              <div className="flex flex-col items-center sm:justify-start justify-center mt-10 sm:mt-0">
-                {" "}
-                <h5 className="font-poppins font-medium text-lg">
-                  Download App
-                </h5>
-                <p className="text-xs font-normal pt-1 font-poppins">
-                  Save $3 with App New User Only
+            <div className="fixed z-[999] sm:gap-x-10 sm:flex flex-wrap overflow-y-auto sm:top-[108px] pl-4 top-[115px] pt-6 left-0 w-full h-full bg-primary_white">
+              <div className="md:hidden">
+                <p className="font-poppins font-semibold text-lg capitalize text-primary_black mb-5">
+                  important links
                 </p>
-                <div className="flex items-center mt-3 gap-2">
-                  <div>
-                    <Img src={qrcode} alt="qrcode" />
-                  </div>
-                  <div className="flex flex-col gap-3">
-                    <Img
-                      src={appstore}
-                      alt="appstore"
-                      className="cursor-pointer"
-                    />
-                    <Img
-                      src={playstore}
-                      alt="playstore"
-                      className="cursor-pointer"
-                    />
+                <ul className="flex flex-col capitalize font-poppins font-normal lg:text-base text-sm items-start gap-5">
+                  {list?.map((item, index) => (
+                    <li
+                      key={index}
+                      className="relative hover:text-primary_black hover:font-semibold after:absolute after:w-full after:h-[2px] after:bg-[#00000065] after:left-0 after:-bottom-1"
+                    >
+                      <a href="#">{item}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="sm:w-[189px] sm:min-h-[550px]">
+                <p className="font-poppins font-semibold text-lg capitalize text-primary_black mb-5 mt-7 sm:mt-0">
+                  categories
+                </p>
+                <ul className="flex flex-col font-poppins font-normal text-sm text-primary_black">
+                  {category.map((item, index) => (
+                    <div
+                      key={index}
+                      className="inline-flex py-2 cursor-pointer group items-center"
+                    >
+                      <li className="group-hover:font-semibold block transition">
+                        {item.category}
+                      </li>
+                      {item.subcategory && (
+                        <MdKeyboardArrowRight className="text-2xl group-hover:translate-x-1 group-hover:opacity-85 transition opacity-55" />
+                      )}
+                    </div>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <div className="flex items-start justify-start sm:mt-0 mt-10 text-2xl gap-4">
+                  <a href="#">
+                    <RiFacebookLine />
+                  </a>
+                  <a href="#">
+                    <TfiTwitter />
+                  </a>
+                  <a href="#">
+                    <FaInstagram />
+                  </a>
+                  <a href="#">
+                    <RiLinkedinLine />
+                  </a>
+                </div>
+                <div className="flex h-[50%] sm:w-auto flex-col mt-6 items-start justify-start">
+                  {" "}
+                  <h5 className="font-poppins font-medium text-lg">
+                    Download App
+                  </h5>
+                  <p className="text-xs font-normal pt-1 font-poppins">
+                    Save $3 with App New User Only
+                  </p>
+                  <div className="flex items-center mt-3 gap-2">
+                    <div>
+                      <Img src={qrcode} alt="qrcode" />
+                    </div>
+                    <div className="flex flex-col gap-3">
+                      <Img
+                        src={appstore}
+                        alt="appstore"
+                        className="cursor-pointer"
+                      />
+                      <Img
+                        src={playstore}
+                        alt="playstore"
+                        className="cursor-pointer"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

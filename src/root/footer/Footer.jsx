@@ -11,7 +11,7 @@ import { AiOutlineCopyright } from "react-icons/ai";
 const Footer = () => {
   return (
     <div className="bg-primary_black pt-10 lg:pt-20">
-      <div className="container flex-col  xl:flex-row flex gap-10 lg:gap-20">
+      <div className="container flex-col xl:flex-row flex gap-10">
         <div>
           <a
             href="#"
